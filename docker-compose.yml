@@ -1,10 +1,9 @@
-name: selenium-learning
 version: "3.8"
 
 services:
   postgres:
     image: postgres:16
-    container_name: postgres_db
+    container_name: selenium_learning_postgres_db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
@@ -16,7 +15,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: selenium_learning_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin123
@@ -27,7 +26,7 @@ services:
 
   test_app:
     build: ./test_app
-    container_name: selenium_practice_app
+    container_name: selenium_learning_test_app
     environment:
       DATABASE_URL: postgresql://admin:admin123@postgres:5432/db_learning
       SECRET_KEY: selenium-training-secret-key

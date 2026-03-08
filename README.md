@@ -57,7 +57,7 @@ docker compose down -v
 ### DB Connection
 
 - **Connection string:** `postgresql://admin:admin123@localhost:5432/db_learning`
-- From pgAdmin, use the service name `postgres_db` as the host (since both run inside Docker).
+- From pgAdmin, use the service name `selenium_learning_postgres_db` as the host (since both run inside Docker).
 
 #### Connect from command line
 
