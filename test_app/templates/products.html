@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<h2 id="products-title">Products</h2>
+
+<!-- Filters -->
+<div class="row mb-4" id="filters-section">
+    <div class="col-md-4">
+        <form method="GET" action="/products" id="search-form">
+            <div class="input-group">
+                <input type="text" class="form-control" id="search-input" name="search"
+                       placeholder="Search products..." value="{{ search }}">
+                <button class="btn btn-outline-primary" type="submit" id="search-btn">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <select class="form-select" id="category-filter" onchange="filterByCategory(this.value)">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+            <option value="{{ cat }}" {{ 'selected' if cat == selected_category }}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4 text-end">
+        <span class="badge bg-info fs-6" id="product-count">{{ products|length }} products found</span>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<div class="row" id="product-grid">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 product-card" data-product-id="{{ product.id }}">
+            <div class="card-body">
+                <h5 class="card-title product-name">{{ product.name }}</h5>
+                <p class="card-text product-description">{{ product.description }}</p>
+                <span class="badge bg-secondary product-category">{{ product.category }}</span>
+                <h4 class="text-success mt-2 product-price">${{ "%.2f"|format(product.price) }}</h4>
+                <p class="text-muted product-stock">In Stock: {{ product.stock }}</p>
+            </div>
+            <div class="card-footer">
+                <form method="POST" action="/add-to-cart/{{ product.id }}">
+                    <button type="submit" class="btn btn-primary w-100 add-to-cart-btn">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if not products %}
+<div class="text-center py-5" id="no-products">
+    <h4>No products found</h4>
+    <a href="/products" class="btn btn-link">View all products</a>
+</div>
+{% endif %}
+
+<script>
+function filterByCategory(category) {
+    window.location.href = '/products?category=' + encodeURIComponent(category);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Frames{% endblock %}
+{% block content %}
+<h2 id="frames-title">Frames & iFrames Practice</h2>
+<p class="text-muted">Practice switching between frames and iframes.</p>
+
+<div class="card mb-4" id="iframe-section">
+    <div class="card-header"><h5>Embedded iFrame</h5></div>
+    <div class="card-body">
+        <iframe src="/frame-content" id="main-frame" name="main-frame"
+                width="100%" height="250" class="border"></iframe>
+    </div>
+</div>
+
+<div class="card mb-4" id="nested-iframe-section">
+    <div class="card-header"><h5>Nested iFrame</h5></div>
+    <div class="card-body">
+        <iframe src="/nested-frame" id="outer-frame" name="outer-frame"
+                width="100%" height="350" class="border"></iframe>
+    </div>
+</div>
+{% endblock %}

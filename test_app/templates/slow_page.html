@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Slow Page{% endblock %}
+{% block content %}
+<h2 id="slow-page-title">Slow Loading Page</h2>
+<div class="alert alert-success" id="slow-page-message">
+    <p>This page took <strong>{{ delay }} seconds</strong> to load.</p>
+    <p>Use this to practice page load timeouts and explicit waits in Selenium.</p>
+</div>
+<a href="/dynamic" class="btn btn-primary" id="back-to-dynamic">Back to Dynamic Content</a>
+{% endblock %}

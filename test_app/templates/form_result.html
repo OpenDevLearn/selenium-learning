@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Form Submitted{% endblock %}
+{% block content %}
+<h2 id="result-title">Form Submission Result</h2>
+<div class="card" id="result-card">
+    <div class="card-body">
+        <table class="table" id="result-table">
+            <tr><th>First Name</th><td id="res-first">{{ data.first_name }}</td></tr>
+            <tr><th>Last Name</th><td id="res-last">{{ data.last_name }}</td></tr>
+            <tr><th>Email</th><td id="res-email">{{ data.email }}</td></tr>
+            <tr><th>Date of Birth</th><td id="res-dob">{{ data.dob }}</td></tr>
+            <tr><th>Gender</th><td id="res-gender">{{ data.gender }}</td></tr>
+            <tr><th>Hobbies</th><td id="res-hobbies">{{ ', '.join(data.hobbies) if data.hobbies else 'None' }}</td></tr>
+            <tr><th>Country</th><td id="res-country">{{ data.country }}</td></tr>
+            <tr><th>Experience</th><td id="res-experience">{{ data.experience }} years</td></tr>
+            <tr><th>Favorite Color</th><td id="res-color">{{ data.color }}</td></tr>
+            <tr><th>Message</th><td id="res-message">{{ data.message }}</td></tr>
+            <tr><th>Agreed Terms</th><td id="res-terms">{{ data.agree_terms }}</td></tr>
+        </table>
+        <a href="/practice-forms" class="btn btn-secondary" id="back-btn">Back to Form</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Data Tables{% endblock %}
+{% block content %}
+<h2 id="tables-title">Employee Directory</h2>
+<p class="text-muted">Practice extracting and validating data from tables.</p>
+
+<!-- Search -->
+<div class="mb-3">
+    <input type="text" class="form-control" id="table-search" placeholder="Search employees..."
+           onkeyup="searchTable()">
+</div>
+
+<table class="table table-striped table-hover table-bordered" id="employee-table">
+    <thead class="table-dark">
+        <tr>
+            <th class="sortable" onclick="sortTable(0)" id="th-id">ID ↕</th>
+            <th class="sortable" onclick="sortTable(1)" id="th-name">Name ↕</th>
+            <th class="sortable" onclick="sortTable(2)" id="th-dept">Department ↕</th>
+            <th class="sortable" onclick="sortTable(3)" id="th-salary">Salary ↕</th>
+            <th id="th-email">Email</th>
+            <th id="th-phone">Phone</th>
+            <th id="th-action">Action</th>
+        </tr>
+    </thead>
+    <tbody id="employee-tbody">
+        {% for emp in employees %}
+        <tr class="employee-row" data-employee-id="{{ emp.id }}">
+            <td class="emp-id">{{ emp.id }}</td>
+            <td class="emp-name">{{ emp.name }}</td>
+            <td class="emp-dept">{{ emp.department }}</td>
+            <td class="emp-salary">${{ "%.2f"|format(emp.salary) }}</td>
+            <td class="emp-email">{{ emp.email }}</td>
+            <td class="emp-phone">{{ emp.phone }}</td>
+            <td>
+                <button class="btn btn-sm btn-info view-btn"
+                        onclick="viewEmployee('{{ emp.name }}', '{{ emp.email }}')">View</button>
+                <button class="btn btn-sm btn-warning edit-btn"
+                        onclick="editEmployee({{ emp.id }})">Edit</button>
+                <button class="btn btn-sm btn-danger delete-btn"
+                        onclick="deleteEmployee({{ emp.id }})">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p id="row-count">Total Employees: {{ employees|length }}</p>
+
+<!-- Employee Detail Modal -->
+<div class="modal fade" id="employee-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Employee Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                <p><strong>Email:</strong> <span id="modal-email"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function searchTable() {
+    const query = document.getElementById('table-search').value.toLowerCase();
+    const rows = document.querySelectorAll('#employee-tbody tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+    });
+}
+
+function sortTable(colIndex) {
+    const table = document.getElementById('employee-table');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.rows);
+    rows.sort((a, b) => {
+        let aVal = a.cells[colIndex].textContent.trim();
+        let bVal = b.cells[colIndex].textContent.trim();
+        if (aVal.startsWith('$')) { aVal = parseFloat(aVal.replace('$','').replace(',','')); bVal = parseFloat(bVal.replace('$','').replace(',','')); }
+        else if (!isNaN(aVal)) { aVal = parseFloat(aVal); bVal = parseFloat(bVal); }
+        return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+    });
+    rows.forEach(r => tbody.appendChild(r));
+}
+
+function viewEmployee(name, email) {
+    document.getElementById('modal-name').textContent = name;
+    document.getElementById('modal-email').textContent = email;
+    new bootstrap.Modal(document.getElementById('employee-modal')).show();
+}
+
+function editEmployee(id) { alert('Edit employee #' + id + ' (not implemented)'); }
+function deleteEmployee(id) {
+    if (confirm('Are you sure you want to delete employee #' + id + '?')) {
+        alert('Employee #' + id + ' deleted (simulated)');
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container.mt-4 {
+    flex: 1;
+}
+.hover-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.hover-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,.15);
+}
+.sortable {
+    cursor: pointer;
+}
+.sortable:hover {
+    background-color: #495057;
+}
+.draggable-item {
+    cursor: grab;
+    font-size: 1rem;
+}
+.product-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}

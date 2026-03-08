@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Home - Selenium Practice{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+    <h1 id="page-title">Welcome to Selenium Practice App</h1>
+    <p class="lead" id="page-subtitle">A comprehensive application designed for learning Selenium WebDriver</p>
+    <hr>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-login">
+                <div class="card-body">
+                    <h5 class="card-title">🔐 Login & Register</h5>
+                    <p class="card-text">Practice form submission, authentication flows, and session handling.</p>
+                    <a href="/login" class="btn btn-primary" id="btn-login">Go to Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-products">
+                <div class="card-body">
+                    <h5 class="card-title">🛒 Products & Cart</h5>
+                    <p class="card-text">Browse products, add to cart, and practice e-commerce workflows.</p>
+                    <a href="/products" class="btn btn-primary" id="btn-products">Browse Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-forms">
+                <div class="card-body">
+                    <h5 class="card-title">📝 Practice Forms</h5>
+                    <p class="card-text">All types of form elements: text, radio, checkbox, select, date, etc.</p>
+                    <a href="/practice-forms" class="btn btn-primary" id="btn-forms">Practice Forms</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-tables">
+                <div class="card-body">
+                    <h5 class="card-title">📊 Data Tables</h5>
+                    <p class="card-text">Sortable tables with employee data for scraping and validation.</p>
+                    <a href="/tables" class="btn btn-primary" id="btn-tables">View Tables</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-dynamic">
+                <div class="card-body">
+                    <h5 class="card-title">⏳ Dynamic Content</h5>
+                    <p class="card-text">Practice waits with dynamically loaded content and AJAX calls.</p>
+                    <a href="/dynamic" class="btn btn-primary" id="btn-dynamic">Dynamic Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100" id="card-interactions">
+                <div class="card-body">
+                    <h5 class="card-title">🖱️ Interactions</h5>
+                    <p class="card-text">Alerts, popups, drag & drop, hover, and advanced interactions.</p>
+                    <a href="/interactions" class="btn btn-primary" id="btn-interactions">Try Interactions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <p class="text-muted" id="demo-credentials">
+            <strong>Demo Credentials:</strong> Username: <code>testuser</code> | Password: <code>password123</code>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+name: selenium-learning
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: db_learning
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    volumes:
+      - pg_admin_data:/var/lib/pgadmin
+
+  test_app:
+    build: ./test_app
+    container_name: selenium_practice_app
+    environment:
+      DATABASE_URL: postgresql://admin:admin123@postgres:5432/db_learning
+      SECRET_KEY: selenium-training-secret-key
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  pg_admin_data:
